@@ -9,7 +9,7 @@ x = tf.placeholder(tf.float64)
 operation = x + x
 
 # notice that you build a graph of mathematical operations
-# it does not performan any computation until you run it
+# it does not perform any computation until you run(evaluate) the graph
 print(x)
 print(operation)
 
