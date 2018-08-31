@@ -2,6 +2,8 @@ import csv
 import random
 import numpy as np;
 
+#inspired by https://developers.google.com/machine-learning/guides/text-classification/step-1
+
 def readData(csvPath):
     texts = []
     labels = []
