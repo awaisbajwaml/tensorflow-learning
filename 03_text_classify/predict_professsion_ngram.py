@@ -1,10 +1,12 @@
 import random
+
 import numpy as np
 import tensorflow as tf
 from sklearn.feature_extraction.text import TfidfVectorizer
 from tensorflow.python.keras import models
 from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.layers import Dropout
+
 
 #Simple demo for trying to predict a profession by the hobby of a person
 #inspired by / taken from https://developers.google.com/machine-learning/guides/text-classification/step-1
