@@ -1,10 +1,7 @@
-import csv
 import random
 import numpy as np
 import tensorflow as tf
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import f_classif
 from tensorflow.python.keras import models
 from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.layers import Dropout
@@ -88,27 +85,22 @@ def vectorizeTextNgram(trainTexts, trainLabels, validationTexts):
         'decode_error': 'replace',
         'analyzer': TOKEN_MODE,  # Split text into word tokens.
         'min_df': MIN_DOCUMENT_FREQUENCY,
+        'max_features': TOP_K
 
     }
     vectorizer = TfidfVectorizer(**kwargs)
 
     # Learn vocabulary from training texts and vectorize training texts.
     vecTrainTexts = vectorizer.fit_transform(trainTexts)
+
+    s = vecTrainTexts.shape[1:]
+    print(type(s))
     print(vecTrainTexts.shape[1])
 
     # Vectorize validation texts.
     vecValidationTexts = vectorizer.transform(validationTexts)
     print(vecValidationTexts.shape[1])
-
-
-    # Select top 'k' of the vectorized features.
-    selector = SelectKBest(f_classif, k=min(TOP_K, vecTrainTexts.shape[1]))
-    selector.fit(vecTrainTexts, trainLabels)
-    vecTrainTexts = selector.transform(vecTrainTexts).astype('float32')
-    vecValidationTexts = selector.transform(vecValidationTexts).astype('float32')
-
-    print(vectorizer.vocabulary_)
-
+    print(len(vectorizer.vocabulary_), vectorizer.vocabulary_)
 
     return vecTrainTexts, vecValidationTexts
 
@@ -128,8 +120,8 @@ def createMlpModel(numClasses, inputShape, dropoutRate=0.2, layers=2):
 
 
 #create input data 80% training and 20% validation
-origTrainTexts, trainLabels = createData(1)
-origValidationTexts, validationLabels = createData(1)
+origTrainTexts, trainLabels = createData(100)
+origValidationTexts, validationLabels = createData(20)
 
 #vectorize the input data
 vecTrainTexts, vecValidationTexts = vectorizeTextNgram(origTrainTexts, trainLabels, origValidationTexts)
