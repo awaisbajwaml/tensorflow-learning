@@ -110,7 +110,7 @@ def vectorizeTextNgram(trainTexts, trainLabels, validationTexts):
 def createMlpModel(numClasses, inputShape, dropoutRate=0.2, layers=2):
     #build our mlp model
     model = models.Sequential()
-    #TODO - i ithink a flatten is necessary
+    #the input shape differs from the used vocabulary - so either supply it when predicting or normalize data
     model.add(Dropout(rate=dropoutRate, input_shape=inputShape))
 
     for _ in range(layers-1):
