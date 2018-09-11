@@ -20,7 +20,7 @@ print(my_array[0][0])
 #select elements "0", "1", "2" as 1 dimensionaly array
 print(my_array[0, 0:3])
 #select elements "0", "1", "2" as array with original dimensions (2 in this case)
-print(my_array[0:2, 0:3])
+print(my_array[0:1, 0:3])
 
 #three dimension
 my_array = np.array([[[0,1,2,3,4], [5,6,7,8,9], [10,11,12,13,14]]])
