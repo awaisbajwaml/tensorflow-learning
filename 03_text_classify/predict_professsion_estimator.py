@@ -22,8 +22,7 @@ estimator = tf.estimator.DNNClassifier(
     config=config,
     hidden_units=[500, 100],
     feature_columns=[embedded_text_feature_column],
-    n_classes=len(dc.professions),
-    optimizer=tf.train.AdagradOptimizer(learning_rate=0.003))
+    n_classes=len(dc.professions))
 
 for profession in dc.professions:
     professionDataFrame = dc.createPandasData(1, profession)
