@@ -110,7 +110,11 @@ def vectorizeTextNgram(trainTexts, trainLabels, validationTexts):
 def createMlpModel(numClasses, inputShape, dropoutRate=0.2, layers=2):
     #build our mlp model
     model = models.Sequential()
-    #the input shape differs from the used vocabulary - so either supply it when predicting or normalize data
+    #With this naive solution every different input requires a new model!
+    #Thats because the input shape differs with the used vocabulary which is based on the input text
+    #A way to avoid this is to define an initial vocabulary and use Out of vocabulary tokens -see
+    #https://www.tensorflow.org/hub/modules/google/nnlm-en-dim128/1
+    #This is not done here for simplicity reasons
     model.add(Dropout(rate=dropoutRate, input_shape=inputShape))
 
     for _ in range(layers-1):
